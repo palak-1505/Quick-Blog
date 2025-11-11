@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../Components/Header/Header'
 import Admin from './Admin'
 import { assets } from '../assets/assets'
+import BlogList from '../Components/BlogList'
 
 function Home() {
   return (
@@ -32,6 +33,8 @@ function Home() {
           <button type='submit'
           className='rounded bg-primary text-white m-1.5 py-2 px-8 hover:scale-105 transition-all cursor-pointer '>Search</button>
         </form>
+
+        <BlogList/>
 
       </div>
       <img src={assets.gradientBackground} alt="" className='absolute top-50 z-1 opacity-50' />
