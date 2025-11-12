@@ -3,6 +3,7 @@ import Header from '../Components/Header/Header'
 import Admin from './Admin'
 import { assets } from '../assets/assets'
 import BlogList from '../Components/BlogList'
+import Newsletter from '../Components/Newsletter'
 
 function Home() {
   return (
@@ -35,9 +36,14 @@ function Home() {
         </form>
 
         <BlogList/>
+        <Newsletter/>
 
       </div>
+
+      
+
       <img src={assets.gradientBackground} alt="" className='absolute top-50 z-1 opacity-50' />
+
     </div>
     
     </>
