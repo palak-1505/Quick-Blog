@@ -2,11 +2,11 @@ import React from 'react'
 
 function Newsletter() {
   return (
-    <div className='w-full py-8 text-center rounded-lg mb-24 '>
-        <h1 className='text-4xl font-bold '>Never Miss a Blog!</h1>
-        <p className='text-gray-500 my-4 mb-8 text-lg'>Subscribe to get the latest blog, new tech, and exclusive news.</p>
+    <div className='text-center flex flex-col items-center space-y-2 my-32 '>
+        <h1 className='md:text-4xl font-semibold text-2xl '>Never Miss a Blog!</h1>
+        <p className='text-gray-500/70  pb-8 md:text-lg'>Subscribe to get the latest blog, new tech, and exclusive news.</p>
         
-        <form className='flex justify-between  border border-gray-300 rounded bg-white overflow-hidden max-w-lg m-auto h-12 w-full md:w-1/2 '>
+        <form className='flex  items-center justify-between  max-w-2xl  h-12 w-full md:h-13 '>
           <input type="text"  
           placeholder='Enter your email' 
           className='outline-none border border-gray-300 rounded-md h-full border-r-0 rounded-r-none px-3 text-gray-500 w-full' 
