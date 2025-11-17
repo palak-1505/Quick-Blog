@@ -1,11 +1,11 @@
 import React from 'react'
-import { assets } from '../../assets/assets'
+import { assets } from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
-import '../../index.css'
 
 
 
-function Header() {
+
+const Header = () => {
 
     const navigate = useNavigate();
 
