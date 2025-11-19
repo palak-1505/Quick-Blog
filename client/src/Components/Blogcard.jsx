@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 
 function Blogcard({blog}) {
     const {title , description, image , _id , category} = blog;
-    const navigate = useNavigate('');
+    const navigate = useNavigate();
+    
   return (
     <div onClick={()=> navigate(`/blog/${_id}`)}
     className='w-full rounded-lg overflow-hidden shadow hover:scale-102 hover:shadow-primary/25 duration-300 cursor-pointer' >

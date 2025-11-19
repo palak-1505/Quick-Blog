@@ -11,7 +11,7 @@ function Home() {
   return (
     <>
     
-    <div className='relative min-h-screen bg-white overflow-hidden'>
+    <div className='relative min-h-screen bg-white overflow-hidden '>
       <Header/>
       <div className='text-center mt-20 mb-8'>
 

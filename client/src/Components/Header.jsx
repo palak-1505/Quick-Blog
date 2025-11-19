@@ -11,7 +11,7 @@ const Header = () => {
 
     return (
         <>
-        <div className='flex flex-row justify-between items-center py-5 mx-8 sm-mx-20 xl:mx-32'>
+        <div className='flex flex-row justify-between items-center py-5 mx-8 sm-mx-20 xl:mx-32 sticky'>
             <img onClick={()=>navigate('/')} 
             src={assets.logo}
             alt="Logo"  
