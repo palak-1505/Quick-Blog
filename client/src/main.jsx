@@ -12,6 +12,7 @@ import AddBlog from './Pages/admin/AddBlog'
 import ListBlog from './Pages/admin/ListBlog'
 import Comments from './Pages/admin/comments'
 import Login from './Components/admin/Login'
+import 'quill/dist/quill.snow.css';
 
 
 const router = createBrowserRouter([
