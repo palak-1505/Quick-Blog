@@ -7,6 +7,7 @@ import Header from '../Components/Header'
 import moment from 'moment'
 import { comments_data } from '../assets/assets'
 import Footer from '../Components/Footer'
+import Loader from '../Components/Loader'
 
 
 
@@ -116,7 +117,7 @@ const addComment = async (e) => {
      <Footer/>
     </div>
     
-  ) : <div>Loading...</div>
+  ) : <Loader/>
 }
 
 export default Blog  

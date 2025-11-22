@@ -7,7 +7,22 @@ import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
 
-    const navigate = useNavigate();
+// Simple auth check - replace with your real auth logic if using Context/Redux
+  const isLoggedIn = () => localStorage.getItem('adminToken') !== null;
+
+
+  const navigate = useNavigate();
+  const loggedIn = isLoggedIn();
+
+  const handleAuthClick = () => {
+    if (loggedIn) {
+      navigate('/admin');
+    } else {
+      navigate('/login');
+    }
+  };
+
+    
 
     return (
         <>
@@ -17,9 +32,10 @@ const Header = () => {
             alt="Logo"  
             className='w-32 sm:w-44  cursor-pointer'
             />
-            <button onClick={()=>navigate('/admin')} 
+            <button onClick={handleAuthClick} 
             className='flex items-center gap-2 rounded-full text-sm cursor-pointer bg-primary text-white px-10 py-2.5'
-            >Login
+            >
+                {loggedIn ? 'Admin' : 'Login'}
                 <img src={assets.arrow} alt="->"  className='w-3'/>
             </button>
         </div>

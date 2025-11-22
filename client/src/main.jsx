@@ -6,7 +6,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './Layout'
 import Home from './Pages/Home'
 import Blog from './Pages/Blog'
-import BlogList from './Components/BlogList'
+import AdminLayout from './Pages/admin/AdminLayout'
+import Dashboard from './Pages/admin/Dashboard'
+import AddBlog from './Pages/admin/AddBlog'
+import ListBlog from './Pages/admin/ListBlog'
+import Comments from './Pages/admin/comments'
+import Login from './Components/admin/Login'
 
 
 const router = createBrowserRouter([
@@ -24,7 +29,35 @@ const router = createBrowserRouter([
         element: <Blog />
       },
     ]
+  },
+  {
+    path: "/login", // New top-level route: Direct full-page login
+    element: <Login />
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />, 
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: "addBlog",
+        element: <AddBlog />
+      },
+      {
+        path: "listBlog",
+        element: <ListBlog/> 
+      },
+      {
+        path: "comments",
+        element: <Comments /> 
+      },
+      
+    ]
   }
+    
 ]);
 
 
