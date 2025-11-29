@@ -1,4 +1,4 @@
-// SDK initialization
+// SDK initializ
 import ImageKit from "imagekit";
 
 

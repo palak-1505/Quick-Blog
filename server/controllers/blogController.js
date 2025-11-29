@@ -1,11 +1,11 @@
 import fs from 'fs';
-import imagekit from '../config/imagekit';
-import Blog from '../models/blog';
+import imagekit from '../config/imagekit.js';
+import Blog from '../models/blog.js';
 
 export const addBlog = async (req, res) => {
     try {
         const {title , subTitle , description, category, isPublished} = JSON.parse(req.body.blog);
-        const imageFile = req.file.path;
+        const imageFile = req.file;
 
         //check if all fields are present
         if(!title || !description || !category || !imageFile) {
@@ -13,7 +13,7 @@ export const addBlog = async (req, res) => {
         }
 
         //upload Image to Imagekit
-        const fileBuffer = fs.readFileSync(imageFile);
+        const fileBuffer = fs.readFileSync(imageFile.path);
         const response = await imagekit.upload({
             file : fileBuffer, //required
             fileName : imageFile.originalname, //required
@@ -42,3 +42,6 @@ export const addBlog = async (req, res) => {
 
     }
 };
+
+
+
