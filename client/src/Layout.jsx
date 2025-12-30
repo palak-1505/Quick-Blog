@@ -8,10 +8,7 @@ import Home from './Pages/Home'
 function Layout() {
     return (
         <>
-       
-        
         <Outlet/>
-        
         </>
         
     )

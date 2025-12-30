@@ -1,23 +1,37 @@
 import React from 'react'
 import { assets, dashboard_data } from '../../assets/assets'
 import BlogTableData from '../../Components/admin/BlogTableData';
+import { useAppContext } from '../../Context/AppContext';
 
 function Dashboard() {
+
+  const {blogs, comments} = useAppContext();
 
   const [dashboardData, setDashboardData] = React.useState({
     blogs: 0,
     comments: 0,
     drafts: 0,
-    recentBlogs: []
+  
   });
+  
 
   const fetchDashboardData = async () => {
-    setDashboardData(dashboard_data)
+    // if (!blogs || blogs.length === 0) return;
+
+    const publishedBlogs = blogs.filter(blog => blog.isPublished);
+    const draftBlogs = blogs.filter(blog => !blog.isPublished);
+
+    setDashboardData({
+      blogs: blogs.length,
+      comments: comments.length, // update later when comments API added
+      drafts: draftBlogs.length,
+       // latest 5 blogs
+    });
   }
 
   React.useEffect(() => {
     fetchDashboardData();
-  }, []);
+  }, [blogs, comments]);
 
   return (
     <div className='flex-1 p-4 md:p-10 bg-blue-50/50'>
@@ -65,12 +79,15 @@ function Dashboard() {
                 </tr>
               </thead>
               <tbody>
-                {dashboardData.recentBlogs.map((blog, index) => {
-                  return <BlogTableData key={blog._id} blog={blog}
-                  fetchBlogs={fetchDashboardData} index={index+1}/>
-                })}
-
+                   {blogs.slice(0, 5).map((blog, index) => (
+                     <BlogTableData
+                       key={blog._id}
+                       blog={blog}
+                       index={index + 1}
+                     />
+                   ))}
               </tbody>
+
             </table>
           </div>
         

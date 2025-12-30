@@ -1,26 +1,40 @@
-import React from 'react'
+import React, { use } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAppContext } from '../../Context/AppContext';
+import toast from 'react-hot-toast';
 
 function Login() {
+  const { axios, token, setToken } = useAppContext();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
-    if (email === 'admin@example.com' && password === 'password') {
-      // Success: Store token (for protecting /admin later)
-      localStorage.setItem('adminToken', 'mock-jwt-token');
-      // Redirect to admin dashboard
-      navigate('/admin');
-    } else {
-      // Failure: Show error (add a state for error message if needed)
-      alert('Invalid email or password'); // Or use a toast/UI error
+    
+    try {
+      const {data} = await  axios.post('/api/admin/login', {email,password});
+
+      if(data.success){
+        setToken(data.token);
+        localStorage.setItem('token',data.token);
+        
+        navigate('/admin')
+      }else{
+        toast.error(data.message)
+
+      }
+      
+    } catch (error) {
+      toast.error(error.message)
+      
     }
     
   }
-
+ 
   return (
     <div className='flex items-center justify-center h-screen'>
       <div className='w-full max-w-sm p-6 max-md:m-6 border border-primary/30 shadow-xl shadow-primary/15 rounded-lg'>
@@ -46,7 +60,7 @@ function Login() {
               className='border-b-2 border-gray-300 p-2 outline-none mb-6' />
             </div>
 
-            <button type='submit' 
+            <button type='submit'
             className='w-full py-3 font-medium bg-primary text-white rounded cursor-pointer hover:bg-primary/90 transition-all'>Login</button>
 
           </form>

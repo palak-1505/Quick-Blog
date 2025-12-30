@@ -1,8 +1,15 @@
-import React, { use } from 'react'
+import React, {useState } from 'react'
 import {assets, blogCategories} from '../../assets/assets'
 import Quill from 'quill';
+import { useAppContext } from '../../Context/AppContext';
+import toast from 'react-hot-toast';
+
 
 function AddBlog() {
+
+  const {axios, fetchBlogs} = useAppContext();
+  const [isAdding, setIsAdding] = useState(false);
+
   const editorRef = React.useRef(null);
   const quillRef = React.useRef(null);
 
@@ -10,11 +17,51 @@ function AddBlog() {
   const [title, setTitle] = React.useState("");
   const [subTitle, setSubTitle] = React.useState("");
   const [category, setCategory] = React.useState("Startup");
-  const [isPublished, setIsPublished] = React.useState(false);
+  const [isPublished, setIsPublished] = React.useState(true);
+  const [author, setAuthor] = React.useState("");
   const [content, setContent] = React.useState("");
 
   const onSubmitHandler = async (e) => {
-    e.preventDefault();
+    
+    try {
+      e.preventDefault();
+      setIsAdding(true);
+
+      const blog = {
+        title,
+        subTitle,
+        description: quillRef.current.root.innerHTML,
+        category,
+        author,
+        isPublished
+      }
+
+      const formData = new FormData();
+      formData.append('blog' , JSON.stringify(blog))
+      formData.append('image', image);
+
+      const {data} = await axios.post('/api/blog/add' , formData);
+
+      if(data.success){
+        toast.success(data.message);
+        setImage(false)
+        setTitle('')
+        quillRef.current.root.innerHTML = '';
+        setCategory('Startup')
+
+        await fetchBlogs();   // ✅ refresh blog list
+        navigate('/admin/listBlog'); 
+        
+      }else{
+        toast.error(data.message)
+      }
+      
+    } catch (error) {
+      toast.error(error.message);
+      
+    }finally{
+      setIsAdding(false);
+    }
   }
 
   const generateContent = async () => {
@@ -39,6 +86,11 @@ function AddBlog() {
           className='mt-2 h-16 rounded cursor-pointer'/>
           <input onChange={(e) => setImage(e.target.files[0])} type="file" id="image" hidden required />
         </label>
+
+        <p className='mt-4'>Author</p>
+        <input type="text" placeholder='Type here' required
+        className='w-full max-w-lg mt-2 p-2 border border-gray-300 outline-none rounded'
+        onChange={(e) => setAuthor(e.target.value)} value={author}/>
 
         <p className='mt-4'>Blog Title</p>
         <input type="text" placeholder='Type here' required
@@ -70,11 +122,14 @@ function AddBlog() {
           <p>Publish Now</p>
           <input type="checkbox" checked={isPublished} 
           className='scale-125 cursor-pointer'
-          onChange={e => setIsPublished(e.target.value)}/>
+          onChange={e => setIsPublished(e.target.checked)}/>
         </div>
 
-        <button className='mt-8 w-40 h-10 bg-primary text-white rounded cursor-pointer text-sm'
-        type='submit'>Add Blog</button>
+        <button disabled={isAdding}
+        className='mt-8 w-40 h-10 bg-primary text-white rounded cursor-pointer text-sm'
+        type='submit'>
+          {isAdding ? 'Adding...' : 'Add Blog'}
+        </button>
 
 
 

@@ -1,18 +1,31 @@
 import React from 'react'
-import { blog_data } from '../../assets/assets';
+import toast from 'react-hot-toast';
 import BlogTableData from '../../Components/admin/BlogTableData';
+import { useAppContext } from '../../Context/AppContext';
 
 function ListBlog() {
 
-  const [blogs, setBlogs] = React.useState([]);
+  // const [blogs, setBlogs] = React.useState([]);
+  const {blogs} = useAppContext();
 
-  const fetchBlogs = async () => {
-    setBlogs(blog_data);
-  }
 
-  React.useEffect(() => {
-    fetchBlogs();
-  }, []);
+  // const fetchBlogs = async () => {
+  //   try {
+  //     const {data} = await axios.get('/api/blog/all');
+  //     if(data.success){
+  //       setBlogs([...data.blogs]);
+  //     }else{
+  //       toast.error(data.message);
+  //     } 
+  //   } catch (error) {
+  //     toast.error(error.message);
+      
+  //   }
+  // }
+
+  // React.useEffect(() => {
+  //   fetchBlogs();
+  // }, []);
      
   return (
     <div className='flex-1 pt-5 px-5 sm:pt-12 sm:pl-16 bg-blue-50/50'>
@@ -32,7 +45,7 @@ function ListBlog() {
               <tbody>
                 {blogs.map((blog, index) => {
                   return <BlogTableData key={blog._id} blog={blog}
-                  fetchBlogs={fetchBlogs} index={index+1}/>
+                  index={index+1}/>
                 })}
 
               </tbody>

@@ -1,16 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { assets } from '../../assets/assets'
 import { Outlet, useNavigate } from 'react-router-dom'
 import Sidebar from '../../Components/admin/Sidebar';
+import { useAppContext } from '../../Context/AppContext';
 
 function AdminLayout() {
 
     const navigate = useNavigate();
+    const {token} = useAppContext();
+
+    useEffect(() => {
+      if(token === null) return;
+
+      if(!token){
+        navigate('/admin/login');
+      }
+    }, [token]);
 
     
 
     const logout = () => {
-      localStorage.removeItem('adminToken'); // Clear the token
+      localStorage.removeItem('token'); // Clear the token
       navigate('/'); // Redirect to home
     };
 

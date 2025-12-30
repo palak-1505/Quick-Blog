@@ -1,19 +1,32 @@
 import React from 'react'
-import { set } from 'react-hook-form';
-import { comments_data } from '../../assets/assets';
 import CommentTableData from '../../Components/admin/CommentTableData';
+import toast from 'react-hot-toast';
+import { useAppContext } from '../../Context/AppContext';
 
 function Comments() {
 
-  const [comments, setComments] = React.useState([]);
+  // const [comments, setComments] = React.useState([]);
   const [filter , setFilter] =  React.useState('Not Approved');
 
-  const fetchComments = async () => {
-    setComments(comments_data);
-  }
+  const {axios, comments, fetchAllComments} = useAppContext();
+
+  // const fetchComments = async () => {
+  //   try {
+  //     const {data} = await axios.get('/api/blog/comments');
+  //     if(data.success){
+  //       setComments([...data.comments]);
+  //     }else{
+  //       toast.error(data.message);
+  //     }
+      
+  //   } catch (error) {
+  //     toast.error(error.message);
+      
+  //   }
+  // }
 
   React.useEffect(() => {
-    fetchComments();
+    fetchAllComments();
   }, []);
 
   return (
@@ -47,7 +60,7 @@ function Comments() {
               if(filter === 'Approved') return comment.isApproved === true;
               return comment.isApproved === false;
               }).map((comment, index) => <CommentTableData key={comment._id} comment={comment}
-              fetchComments={fetchComments} index={index+1} />)}
+              fetchComments={fetchAllComments} index={index+1} />)}
           </tbody>
         </table>
 
