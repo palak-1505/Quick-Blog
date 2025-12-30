@@ -10,7 +10,7 @@ const CommentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    constent: {
+    content: {
         type: String,
         required: true,
     },
