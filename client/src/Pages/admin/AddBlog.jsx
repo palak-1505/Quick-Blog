@@ -3,12 +3,15 @@ import {assets, blogCategories} from '../../assets/assets'
 import Quill from 'quill';
 import { useAppContext } from '../../Context/AppContext';
 import toast from 'react-hot-toast';
+import {parse} from 'marked';
+import { useNavigate } from 'react-router-dom';
 
 
 function AddBlog() {
 
   const {axios, fetchBlogs} = useAppContext();
   const [isAdding, setIsAdding] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const editorRef = React.useRef(null);
   const quillRef = React.useRef(null);
@@ -19,7 +22,7 @@ function AddBlog() {
   const [category, setCategory] = React.useState("Startup");
   const [isPublished, setIsPublished] = React.useState(true);
   const [author, setAuthor] = React.useState("");
-  const [content, setContent] = React.useState("");
+  
 
   const onSubmitHandler = async (e) => {
     
@@ -65,6 +68,24 @@ function AddBlog() {
   }
 
   const generateContent = async () => {
+    if(!title || !subTitle) return toast.error("Please provide title and sub title first");
+    try{
+      setLoading(true);
+      const prompt = `Write a detailed blog post about ${title} with a sub title of ${subTitle}. Make it engaging and informative.`;
+      const {data} = await axios.post('/api/blog/generate' , {prompt});
+
+      if(data.success){
+        quillRef.current.root.innerHTML = parse(data.generatedText);
+      }else{
+        toast.error(data.message);
+      }
+    }catch(error){
+      toast.error(error.message);
+    } 
+    finally{
+      setLoading(false);
+    }
+
 
   }
 
@@ -105,7 +126,12 @@ function AddBlog() {
         <p className='mt-4'>Blog Description</p>
         <div className='max-w-lg h-72 pb-16 sm:pb-10 pt-2 relative'>
           <div ref={editorRef}></div>
-          <button type='button' onClick={generateContent}
+          {loading && (<div className='absolute top-0 bottom-0 left-0  bg-black/10 flex
+          items-center justify-center mt-2 right-0'>
+            <div className='w-8 h-8 rounded-full border-2 border-t-white animate-spin'></div>
+            </div>
+          )}
+          <button type='button' onClick={generateContent} disabled={loading}
           className='absolute bottom-1 right-2 ml-2 text-xs text-white bg-black/70 px-4 py-1.5 rounded hover:underline cursor-pointer'>Generate with AI</button>
         </div>
 
