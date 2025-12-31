@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./Pages/Home";
 import Blog from "./Pages/Blog";
-import { AppProvider, useAppContext } from "./Context/AppContext";
+import { AppProvider } from "./Context/AppContext";
 import AdminLayout from "./Pages/admin/AdminLayout";
 import Dashboard from "./Pages/admin/Dashboard";
 import AddBlog from "./Pages/admin/AddBlog";
@@ -13,6 +13,7 @@ import Login from "./Components/admin/Login";
 import "quill/dist/quill.snow.css";
 import {Toaster} from 'react-hot-toast'
 import { Navigate } from "react-router-dom";
+
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem("token");
