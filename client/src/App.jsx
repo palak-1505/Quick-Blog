@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./Pages/Home";
 import Blog from "./Pages/Blog";
-import { AppProvider } from "./Context/AppContext";
+import { AppProvider } from "./context/AppContext";
 import AdminLayout from "./Pages/admin/AdminLayout";
 import Dashboard from "./Pages/admin/Dashboard";
 import AddBlog from "./Pages/admin/AddBlog";

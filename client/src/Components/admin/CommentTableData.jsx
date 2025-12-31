@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { assets } from '../../assets/assets';
-import { useAppContext } from '../../Context/AppContext';
+import { useAppContext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
 
 function CommentTableData({comment, fetchComments}) {

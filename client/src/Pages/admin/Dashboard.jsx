@@ -1,7 +1,7 @@
 import React from 'react'
 import { assets, dashboard_data } from '../../assets/assets'
 import BlogTableData from '../../Components/admin/BlogTableData';
-import { useAppContext } from '../../Context/AppContext';
+import { useAppContext } from '../../context/AppContext';
 
 function Dashboard() {
 

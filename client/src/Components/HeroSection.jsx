@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { assets } from '../assets/assets'
-import { useAppContext } from '../Context/AppContext'
+import { useAppContext } from '../context/AppContext'
 
 function HeroSection() {
   const {input,setInput} = useAppContext();

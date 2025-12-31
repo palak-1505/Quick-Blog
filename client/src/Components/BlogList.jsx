@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {blogCategories } from '../assets/assets'
 import { motion } from 'framer-motion'
 import Blogcard from './Blogcard'
-import { useAppContext } from '../Context/AppContext'
+import { useAppContext } from '../context/AppContext'
 
 
 function BlogList() {

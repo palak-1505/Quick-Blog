@@ -1,7 +1,7 @@
 import React from 'react'
 import toast from 'react-hot-toast';
 import BlogTableData from '../../Components/admin/BlogTableData';
-import { useAppContext } from '../../Context/AppContext';
+import { useAppContext } from '../../context/AppContext';
 
 function ListBlog() {
 

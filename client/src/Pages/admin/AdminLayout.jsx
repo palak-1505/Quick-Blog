@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { assets } from '../../assets/assets'
 import { Outlet, useNavigate } from 'react-router-dom'
 import Sidebar from '../../Components/admin/Sidebar';
-import { useAppContext } from '../../Context/AppContext';
+import { useAppContext } from '../../context/AppContext';
 
 function AdminLayout() {
 

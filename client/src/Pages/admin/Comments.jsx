@@ -1,7 +1,7 @@
 import React from 'react'
 import CommentTableData from '../../Components/admin/CommentTableData';
 import toast from 'react-hot-toast';
-import { useAppContext } from '../../Context/AppContext';
+import { useAppContext } from '../../context/AppContext';
 
 function Comments() {
 
